@@ -3,7 +3,7 @@
 
 
 <h2>Description</h2> 
-
+In this lab, I was tasked with investigating a suspected malware intrusion using the tool Volatility. I began my investigation by opening the memory.dmp file with Volatility and using the command windows.netstat to reveal the machine's connections. The process ChromeSetup.exe immediately stood out as warranting further investigation. I took the IP address it was communicating with, 58[.]64[.]204[.]181, and searched it on VirusTotal, where I discovered that a majority of antivirus vendors flagged the communicating files as malicious, further raising my suspicion about this program. Next, I used Volatility's windows.cmdline command to determine the program's location and the PID (Process Identifier). The program was found to be running out of the user's Downloads folder, and the PID was 4628. The next step was to export the binary from the memory.dmp to my virtual machine for further analysis, which I accomplished using the -o flag and windows.dumpfiles command with --pid 4628. Once the suspicious binary was on my virtual machine, I took caution not to execute it and used the command sha256sum to obtain the program's hash. With the hash, I uploaded it to VirusTotal, where my suspicion was confirmed as the vast majority of vendors labeled the executable as malware. It was commonly seen as ChromeSetup.exe, further confirming the presence of this malware on the machine. I conducted additional open-source intelligence on the binary and the IP address it was communicating with. I discovered the IP to be based out of Hong Kong, the program was first created on 2019-12-01, and the primary domain the malware contacts: ddos[.]dnsb8[.]net.
 
 <br />
 
