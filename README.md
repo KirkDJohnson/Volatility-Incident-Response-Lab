@@ -23,20 +23,20 @@ The scenario for the lab/walkthorugh:<br/>
 <img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/47365d7c-b1da-4fe6-92ea-56bbd79d2a67" height="100%" width="100%" alt="Volatility Lab"/>
 <br />
 <br />
-To begin the investigation with Volatility, I used to the -r flag with the memory.dmp file with the windows.netstat command that shows all connections programs are making. The program that jumped out me for further investigation was ChromeSetupexe.<br/>
+To begin the investigation with Volatility, I used to the -r flag with the memory.dmp file with the windows.netstat command that shows all the connections the programs are making. The program that jumped out me for further investigation was ChromeSetupexe.<br/>
 <img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/9af82b0e-1ebe-49ae-9acb-79195f3301bb" height="100%" width="100%" alt="Volatility Lab"/>
 <br />
 <br />
-A simple yet oftentimes effective part of the inital investiation is to use OSINT tools to see if the IP communcated with the appliaction is flagged as malicious. While the IP itself was not not flagged as malciious, under details, the communicating files were clearly malicious confirming suspicion that the program ChromeSetup and the IP address it is communicating with are malciious.<br/>
+A simple yet oftentimes effective part of the intial investiation is to use OSINT tools to see if the IP communcated with the appliaction is flagged as malicious. While the IP itself was not not flagged as malicious, under details, the communicating files were clearly malicious confirming suspicion that the program ChromeSetup and the IP address it is communicating with are malciious.<br/>
 <img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/bb1869b1-9c40-4eae-93d6-07f4814fed1c" height="100%" width="100%" alt="Volatility Lab"/>
 <img src="" height="100%" width="100%" alt="Volatility Lab"/>
 <br />
 <br />
-Now it is clear that the process warrants further investigation, sos I pivoted back to Volatility and used the command windows.cmdline to determine where the program is on the machine and the PID or Process Identifier. This revealed the program to be run out of .../alex/Downloads\ChromeSetup.exe and the PID to be 4628.<br/>
+Now it is clear that the process warrants further investigation, so I pivoted back to Volatility and used the command windows.cmdline to determine where the program is on the machine and the PID or Process Identifier. This revealed the program to be run out of .../alex/Downloads\ChromeSetup.exe and the PID to be 4628.<br/>
 <img src="" height="100%" width="100%" alt="Volatility Lab"/>
 <br />
 <br />
-In order obtain more information about the program for the investigation, I went to help page of volatility to see if I can export the binary for further analysis and discoered with the -o flag and windows.dump files I am able to extract it.<br/>
+In order obtain more information about the program for the investigation, I went to help page of volatility to see if I can export the binary for further analysis and discoered with the -o flag and windows.dumpfiles I am able to extract it.<br/>
 <img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/0dfa2a8c-780d-4f07-83dd-a73187b14492" height="100%" width="100%" alt="Volatility Lab"/>
 <img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/9ca22b20-475e-4d81-b6b2-9a73f436f273" height="100%" width="100%" alt="Volatility Lab"/>
 <br />
@@ -46,7 +46,7 @@ The binary if safely downloaded in a virtual machine. I used sha256sum on the su
 <img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/a439eac5-a515-4932-8608-8a125441f0de" height="100%" width="100%" alt="Volatility Lab"/>
 <br />
 <br />
-A couple other important bits of evidence that can be helpful in the investigation, report or future defense from the same or similar threats is dicovering the contacted URLs in virus total which shows one particular domain ddos[.]dnsb8[.]net, that should likely be entirely blocked, and seeing that the traffic origianted in Hong Kong, there may potentially be no legitmate traffic for that geopgrahic, resulting in the abiluty to block IP traffic from that region as a defensive measure.<br/>
+A couple other important bits of evidence that can be helpful in the investigation, report or future defense from the same or similar threats is dicovering the contacted URLs in virus total which shows one particular domain ddos[.]dnsb8[.]net, that should likely be entirely blocked, and seeing that the traffic origianted in Hong Kong. There may potentially be no legitmate traffic for that geographic region, resulting in the abiluty to block IP traffic from that region as a defensive measure.<br/>
 <img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/493d5e84-a937-4be1-9c11-e1714f338a0d" height="100%" width="100%" alt="Volatility Lab"/>
 <img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/493d5e84-a937-4be1-9c11-e1714f338a0d" height="100%" width="100%" alt="Volatility Lab"/>
 <br />
