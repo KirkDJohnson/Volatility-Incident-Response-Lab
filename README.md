@@ -29,11 +29,12 @@ To begin the investigation with Volatility, I used to the -r flag with the memor
 <br />
 A simple yet oftentimes effective part of the intial investiation is to use OSINT tools to see if the IP communcated with the appliaction is flagged as malicious. While the IP itself was not not flagged as malicious, under details, the communicating files were clearly malicious confirming suspicion that the program ChromeSetup and the IP address it is communicating with are malciious.<br/>
 <img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/bb1869b1-9c40-4eae-93d6-07f4814fed1c" height="100%" width="100%" alt="Volatility Lab"/>
-<img src="" height="100%" width="100%" alt="Volatility Lab"/>
+
 <br />
 <br />
 Now it is clear that the process warrants further investigation, so I pivoted back to Volatility and used the command windows.cmdline to determine where the program is on the machine and the PID or Process Identifier. This revealed the program to be run out of .../alex/Downloads\ChromeSetup.exe and the PID to be 4628.<br/>
-<img src="" height="100%" width="100%" alt="Volatility Lab"/>
+<img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/166ab10b-625f-403d-ad34-b15563f8a545" height="100%" width="100%" alt="Volatility Lab"/>
+<img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/9eba8250-53a8-4dac-a9ea-7e2e537afe68" height="100%" width="100%" alt="Volatility Lab"/>
 <br />
 <br />
 In order obtain more information about the program for the investigation, I went to help page of volatility to see if I can export the binary for further analysis and discoered with the -o flag and windows.dumpfiles I am able to extract it.<br/>
@@ -43,12 +44,12 @@ In order obtain more information about the program for the investigation, I went
 <br />
 The binary if safely downloaded in a virtual machine. I used sha256sum on the suspicious binary to obtian the hash. With the hash I uploaded it to VirusTotal and confirmed the suspicion that it is a malware, particualrly an info stealer.<br/>
 <img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/be22033c-6b71-41c5-a3b4-de5baa2c29c0" height="100%" width="100%" alt="Volatility Lab"/>
-<img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/a439eac5-a515-4932-8608-8a125441f0de" height="100%" width="100%" alt="Volatility Lab"/>
+<img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/1d9fbbd5-a5bb-4043-8063-34ce2f017374" height="100%" width="100%" alt="Volatility Lab"/>
 <br />
 <br />
 A couple other important bits of evidence that can be helpful in the investigation, report or future defense from the same or similar threats is dicovering the contacted URLs in virus total which shows one particular domain ddos[.]dnsb8[.]net, that should likely be entirely blocked, and seeing that the traffic origianted in Hong Kong. There may potentially be no legitmate traffic for that geographic region, resulting in the abiluty to block IP traffic from that region as a defensive measure.<br/>
 <img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/493d5e84-a937-4be1-9c11-e1714f338a0d" height="100%" width="100%" alt="Volatility Lab"/>
-<img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/493d5e84-a937-4be1-9c11-e1714f338a0d" height="100%" width="100%" alt="Volatility Lab"/>
+<img src="https://github.com/KirkDJohnson/Volatility-Incident-Response-Lab/assets/164972007/a4268229-4a2a-413a-8988-c48dfd7ff9dc" height="100%" width="100%" alt="Volatility Lab"/>
 <br />
 <br />
 
